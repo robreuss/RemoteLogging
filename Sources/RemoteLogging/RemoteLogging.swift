@@ -1,11 +1,6 @@
 import Foundation
 import ElementalController
 
-public struct LogLine: Codable {
-    public var text = ""
-    public var logLevel: LogLevel
-}
-
 var eid_logger: Int8 = 0
 
 public class RemoteLogging {
@@ -17,7 +12,7 @@ public class RemoteLogging {
     var element: Element?
     var isConnected: Bool = false
     public typealias LogLineHandler = ((LogLine) -> Void)
-    private var incomingLogLineHandler: LogLineHandler?
+    public var incomingLogLineHandler: LogLineHandler?
 
     public init() {}
     
