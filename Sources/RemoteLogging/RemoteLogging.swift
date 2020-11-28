@@ -94,8 +94,6 @@ public class RemoteLogging {
   
             //self.statusBar.text = "Connecting..."
             
-            serverDevice.connect()
-            
             serverDevice.events.connected.handler = { _ in
                 //self.statusBar.text = "Connected to \(self.serviceName)"
                 self.isConnected = true
@@ -107,13 +105,17 @@ public class RemoteLogging {
                 sleep(3) // Don't rush or we might get a reconnect to a disappearing server
                 self.elementalController.browser.browseFor(serviceName: self.serviceName)
             }
-        }
+            
+            serverDevice.connect()
 
+        }
       
     }
     
     public func sendLogLineToServer(logLine: LogLine) {
 
+        if !self.isConnected { return }
+        
         let jsonEncoder = JSONEncoder()
         do {
             let jsonData = try jsonEncoder.encode(logLine)
