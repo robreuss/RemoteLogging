@@ -71,9 +71,6 @@ public class RemoteLogging {
         
         elementalController.setupForBrowsingAs(deviceNamed: deviceName)
         
-        //self.statusBar.text = "Searching for service \(serviceName)..."
-        elementalController.browser.browseFor(serviceName: serviceName)
-        
         // MARK: -
         // MARK: Handlers
         
@@ -109,6 +106,10 @@ public class RemoteLogging {
             serverDevice.connect()
 
         }
+        
+        //self.statusBar.text = "Searching for service \(serviceName)..."
+        elementalController.browser.browseFor(serviceName: serviceName)
+       
       
     }
     
