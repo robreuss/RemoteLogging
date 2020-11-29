@@ -76,6 +76,8 @@ public class RemoteLogging {
         
         elementalController.browser.events.foundServer.handler { serverDevice in
             
+            print("FOUND SERVER")
+            
             self.serverDevice = serverDevice
             
             self.element = serverDevice.attachElement(Element(identifier: eid_logger, displayName: "Logger", proto: .tcp, dataType: .Data))
@@ -92,14 +94,15 @@ public class RemoteLogging {
             //self.statusBar.text = "Connecting..."
             
             serverDevice.events.connected.handler = { _ in
-                //self.statusBar.text = "Connected to \(self.serviceName)"
+                print("CONNECTED TO SERVICE")
                 self.isConnected = true
             }
             
             serverDevice.events.deviceDisconnected.handler = { _ in
                 self.isConnected = false
+                print("DISCONNECTED FROM SERVICE")
                 //self.statusBar.text = "Searching for \(self.roverMotorsServiceName)..."
-                sleep(3) // Don't rush or we might get a reconnect to a disappearing server
+                sleep(5) // Don't rush or we might get a reconnect to a disappearing server
                 self.elementalController.browser.browseFor(serviceName: self.serviceName)
             }
             
