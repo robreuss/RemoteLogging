@@ -11,7 +11,7 @@ public class RemoteLogging {
     var serviceName: String = ""
     var element: Element?
     var isConnected: Bool = false
-    public typealias LogLineHandler = ((LogLine) -> Void)
+    public typealias LogLineHandler = ((ElementalController.LogLine) -> Void)
     public var incomingLogLineHandler: LogLineHandler?
 
     public init() {}
@@ -39,7 +39,7 @@ public class RemoteLogging {
                     
                     do {
                         if let logLine = element.dataValue {
-                            let decodedLogLine = try jsonDecoder.decode(LogLine.self, from: logLine)
+                            let decodedLogLine = try jsonDecoder.decode(ElementalController.LogLine.self, from: logLine)
                             if let handler = self.incomingLogLineHandler {
                                 
                                 handler(decodedLogLine)
@@ -116,7 +116,7 @@ public class RemoteLogging {
       
     }
     
-    public func sendLogLineToServer(logLine: LogLine) {
+    public func sendLogLineToServer(logLine: ElementalController.LogLine) {
 
         if !self.isConnected { return }
         
